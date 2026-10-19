@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de Key</title>
+    <style>
+        body {
+            background-color: #14141c;
+            color: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .card {
+            background-color: #1c1c26;
+            padding: 40px;
+            border-radius: 12px;
+            border: 2px solid #826eff;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            width: 300px;
+        }
+        h1 {
+            color: #ffffff;
+            font-size: 24px;
+            margin-top: 0;
+        }
+        p {
+            color: #a0a0b0;
+            font-size: 14px;
+        }
+        .key-box {
+            background-color: #232330;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 22px;
+            font-weight: bold;
+            color: #50c878;
+            margin: 20px 0;
+            border: 1px solid #333;
+            letter-spacing: 1px;
+        }
+        button {
+            background-color: #826eff;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            transition: 0.2s;
+        }
+        button:hover {
+            background-color: #6a55ff;
+        }
+        button:active {
+            transform: scale(0.95);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h1>🔒 Gerador de Key</h1>
+        <p>Key válida apenas para hoje.</p>
+        
+        <div class="key-box" id="keyDisplay">Gerando...</div>
+        
+        <button onclick="copiarKey()" id="copyBtn">Copiar Key</button>
+    </div>
+
+    <script>
+        // Pega a data atual do dispositivo
+        const data = new Date();
+        const dia = data.getDate();
+        const mes = data.getMonth() + 1; // No JavaScript, Janeiro é 0, então somamos 1
+        
+        // Faz o cálculo igual ao do Roblox: (Dia * Mês) + 123
+        const resultado = (dia * mes) + 123;
+        const keyHoje = "MURILO-" + resultado;
+        
+        // Mostra a key na tela
+        document.getElementById('keyDisplay').innerText = keyHoje;
+
+        // Função do botão de copiar
+        function copiarKey() {
+            navigator.clipboard.writeText(keyHoje).then(() => {
+                const btn = document.getElementById('copyBtn');
+                btn.innerText = "Copiado com sucesso!";
+                btn.style.backgroundColor = "#50c878";
+                
+                setTimeout(() => {
+                    btn.innerText = "Copiar Key";
+                    btn.style.backgroundColor = "#826eff";
+                }, 2000);
+            });
+        }
+    </script>
+
+</body>
+</html>
